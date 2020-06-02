@@ -4,14 +4,14 @@ Tournament.resetGlobalVariables = function(){
 	Tournament.NUM_TURNS = 10;
 
 	Tournament.INITIAL_AGENTS = [
-		{strategy:"tft", count:3},
-		{strategy:"all_d", count:3},
-		{strategy:"all_c", count:3},
-		{strategy:"grudge", count:3},
-		{strategy:"prober", count:3},
-		{strategy:"tf2t", count:3},
-		{strategy:"pavlov", count:3},
-		{strategy:"random", count:4}
+		{strategy:"tft", count:1},
+		{strategy:"all_d", count:1},
+		{strategy:"all_c", count:1},
+		{strategy:"grudge", count:1},
+		{strategy:"prober", count:1},
+		{strategy:"tf2t", count:1},
+		{strategy:"pavlov", count:1},
+		{strategy:"random", count:1}
 	];
 
 	Tournament.FLOWER_CONNECTIONS = false;

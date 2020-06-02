@@ -128,6 +128,24 @@ PD.playOneTournament = function(agents, turns){
 function Logic_tft(){
 	var self = this;
 	var otherMove = PD.COOPERATE;
+	var roundCounter = 1;
+	self.play = function(){
+		if(roundCounter<10){
+			return otherMove;
+		}else{
+			return PD.CHEAT;
+		}
+	};
+	self.remember = function(own, other){
+		otherMove = other;
+		roundCounter++;
+	};
+}
+
+function Logic_tf2t(){
+	var self = this;
+	var howManyTimesCheated = 0;
+	var otherMove = PD.CHEAT;
 	self.play = function(){
 		return otherMove;
 	};
@@ -136,54 +154,70 @@ function Logic_tft(){
 	};
 }
 
-function Logic_tf2t(){
+function Logic_grudge(){//Pecl
 	var self = this;
-	var howManyTimesCheated = 0;
+	var othersMoves = [];
+	var roundCounter = 1;
 	self.play = function(){
-		if(howManyTimesCheated>=2){
-			return PD.CHEAT; // retaliate ONLY after two betrayals
-		}else{
+		if(roundCounter <=2){
 			return PD.COOPERATE;
+		}else if(2 < roundCounter < 6){ 
+			if(othersMoves.includes(PD.COOPERATE)){
+				return PD.COOPERATE;
+			}else{
+				return PD.CHEAT;
+			}
+		}else if(5 < roundCounter < 11){
+			othersMovesSecondSeries = [];
+			for(i=2;i<othersMoves.length;i++){
+				othersMovesSecondSeries.push(othersMoves[i]);
+			}
+			if(othersMovesSecondSeries.includes(PD.COOPERATE)){
+				return PD.COOPERATE;
+			}else{
+				return PD.CHEAT;
+			}
+		}else if(10 < roundCounter < 21){
+			//nah
 		}
 	};
 	self.remember = function(own, other){
-		if(other==PD.CHEAT){
-			howManyTimesCheated++;
-		}else{
-			howManyTimesCheated = 0;
-		}
-	};
-}
-
-function Logic_grudge(){
-	var self = this;
-	var everCheatedMe = false;
-	self.play = function(){
-		if(everCheatedMe) return PD.CHEAT;
-		return PD.COOPERATE;
-	};
-	self.remember = function(own, other){
-		if(other==PD.CHEAT) everCheatedMe=true;
+		othersMoves.push(other);
+		roundCounter++;
 	};
 }
 
 function Logic_all_d(){
 	var self = this;
+	var otherMove = PD.COOPERATE;
+	var roundCounter = 1;
 	self.play = function(){
-		return PD.CHEAT;
+		if(roundCounter<10){
+			return otherMove;
+		}else{
+			return PD.CHEAT;
+		}
 	};
 	self.remember = function(own, other){
-		// nah
+		otherMove = other;
+		roundCounter++;
 	};
 }
 
 function Logic_all_c(){
 	var self = this;
+	var otherMove = PD.COOPERATE;
+	var roundCounter = 1;
 	self.play = function(){
-		return PD.COOPERATE;
+		if(roundCounter<10){
+			return otherMove;
+		}else{
+			return PD.CHEAT;
+		}
 	};
 	self.remember = function(own, other){
-		// nah
+		otherMove = other;
+		roundCounter++;
 	};
 }
 
