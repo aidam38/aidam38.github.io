@@ -232,17 +232,25 @@ function Logic_grudge(){//Pecl
 function Logic_all_d(){
 	var self = this;
 	var otherMove = PD.COOPERATE;
-	var roundCounter = 1;
+	var probability = 0.5;
+	var step = 0;
+
 	self.play = function(){
-		if(roundCounter<10){
-			return otherMove;
+		var rnd = Math.random();
+		if (rnd < probability){
+			return PD.COOPERATE;
 		}else{
 			return PD.CHEAT;
 		}
 	};
 	self.remember = function(own, other){
-		otherMove = other;
-		roundCounter++;
+		if(other == PD.CHEAT){
+			step--;
+		}else{
+			step++;
+		}
+		probability += Math.sign(step)*Math.pow(0.5, Math.abs(step))*0.5;
+		console.log(probability);
 	};
 }
 
@@ -276,14 +284,12 @@ function Logic_random(){
 // Start off Cooperating
 // Then, if opponent cooperated, repeat past move. otherwise, switch.
 function Logic_pavlov(){
-	var self = this;
-	var myLastMove = PD.COOPERATE;
+        var self = this;
 	self.play = function(){
-		return myLastMove;
+		return PD.COOPERATE;
 	};
 	self.remember = function(own, other){
-		myLastMove = own; // remember MISTAKEN move
-		if(other==PD.CHEAT) myLastMove = ((myLastMove==PD.COOPERATE) ? PD.CHEAT : PD.COOPERATE); // switch!
+		// nah
 	};
 }
 
