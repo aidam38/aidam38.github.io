@@ -160,14 +160,17 @@ function Logic_grudge(){//Pecl
 	var roundCounter = 1;
 	self.play = function(){
 		if(roundCounter <=2){
+			alert(1);
 			return PD.COOPERATE;
 		}else if(2 < roundCounter < 6){ 
+			alert(2);
 			if(othersMoves.includes(PD.COOPERATE)){
 				return PD.COOPERATE;
 			}else{
 				return PD.CHEAT;
 			}
 		}else if(5 < roundCounter < 11){
+			alert(3);
 			othersMovesSecondSeries = [];
 			for(i=2;i<othersMoves.length;i++){
 				othersMovesSecondSeries.push(othersMoves[i]);
@@ -178,7 +181,35 @@ function Logic_grudge(){//Pecl
 				return PD.CHEAT;
 			}
 		}else if(10 < roundCounter < 21){
-			//nah
+			alert(4);
+			var CooperateWithMe = 0;
+			for(i=0;i<othersMoves.length;i++){
+				if(othersMoves[i]==PD.COOPERATE){
+					CooperateWithMe++;
+				}
+			}if(CooperateWithMe>6){
+				return PD.COOPERATE;
+			}else{
+				return othersMoves[othersMoves.length - 1];
+			}
+		}else if(20 < roundCounter){
+			alert(5);
+			var CooperateWithMe = 0;
+			for(i=0;i<othersMoves.length;i++){
+				if(othersMoves[i]==PD.COOPERATE){
+					CooperateWithMe++;
+				}
+			if(CooperateWithMe>0.7*roundCounter){
+				if(othersMoves[othersMoves.length - 1] == PD.CHEAT && othersMoves[othersMoves.length - 2] == PD.CHEAT){
+					return PD.CHEAT;
+				}else{
+					return PD.COOPERATE;
+				}
+			}else if(0.3*roundCounter < CooperateWithMe <= roundCounter){
+				return othersMoves[othersMoves.length - 1];
+			}else{
+				return PD.CHEAT;
+			}
 		}
 	};
 	self.remember = function(own, other){
