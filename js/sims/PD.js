@@ -252,28 +252,31 @@ function Logic_prober(){
 
 	var self = this;
 
-	var moves = [PD.COOPERATE, PD.CHEAT, PD.COOPERATE, PD.COOPERATE];
-	var everCheatedMe = false;
-
 	var otherMove = PD.COOPERATE;
+	var moves = [PD.COOPERATE, PD.COOPERATE, PD.CHEAT, PD.COOPERATE, otherMove, PD.COOPERATE, otherMove, PD.COOPERATE, PD.COOPERATE];
+	var roundCounter = 1;
+	var howManyTimesCheated = 0;
+
 	self.play = function(){
-		if(moves.length>0){
-			// Testing phase
-			var move = moves.shift();
-			return move;
+		round15 = roundCounter - 1 % 15
+		if(round15 < 9){
+			return moves[round15];
 		}else{
-			if(everCheatedMe){
-				return otherMove; // TFT
+			if(howManyTimesCheated>=2){
+				return PD.CHEAT; // retaliate ONLY after two betrayals
 			}else{
-				return PD.CHEAT; // Always Cheat
+				return PD.COOPERATE;
 			}
 		}
 	};
 	self.remember = function(own, other){
-		if(moves.length>0){
-			if(other==PD.CHEAT) everCheatedMe=true; // Testing phase: ever retaliated?
+                if(other==PD.CHEAT){
+			howManyTimesCheated++;
+		}else{
+			howManyTimesCheated = 0;
 		}
-		otherMove = other; // for TFT
+		otherMove = other;
+		roundCounter++;
 	};
 
 }
