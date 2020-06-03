@@ -165,14 +165,14 @@ function SandboxUI(config){
 	var xDiff = 220;
 	var yDiff = 80;
 	var yOff = 40;
-	_makePopulationControl(    0, yOff+0,       "tft",		1);
-	_makePopulationControl(xDiff, yOff+0,       "all_d",	1);
-	_makePopulationControl(    0, yOff+yDiff,   "all_c",	1);
-	_makePopulationControl(xDiff, yOff+yDiff,   "grudge",	1);
-	_makePopulationControl(    0, yOff+yDiff*2, "prober",	1);
-	_makePopulationControl(xDiff, yOff+yDiff*2, "tf2t",		1);
-	_makePopulationControl(    0, yOff+yDiff*3, "pavlov",	1);
-	_makePopulationControl(xDiff, yOff+yDiff*3, "random",	1);
+	_makePopulationControl(    0, yOff+0,       "tft",		3);
+	_makePopulationControl(xDiff, yOff+0,       "all_d",	3);
+	_makePopulationControl(    0, yOff+yDiff,   "all_c",	3);
+	_makePopulationControl(xDiff, yOff+yDiff,   "grudge",	3);
+	_makePopulationControl(    0, yOff+yDiff*2, "prober",	3);
+	_makePopulationControl(xDiff, yOff+yDiff*2, "tf2t",		3);
+	_makePopulationControl(    0, yOff+yDiff*3, "pavlov",	3);
+	_makePopulationControl(xDiff, yOff+yDiff*3, "random",	3);
 
 	// Adjust the WHOLE population...
 	/******************************
@@ -193,7 +193,7 @@ function SandboxUI(config){
 		var initValue = Tournament.INITIAL_AGENTS[_anchoredIndex].count;
 
 		// SPECIAL CASE: THIS IS ALREADY FULL
-		if(initValue==8){
+		if(initValue==24){
 
 			// Pretend it was 1 for all seven others, 25-7 for this.
 			_population = [];

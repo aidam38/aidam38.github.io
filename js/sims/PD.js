@@ -106,9 +106,9 @@ PD.playRepeatedGame = function(playerA, playerB, turns){
 PD.playOneTournament = function(agents, turns){
 
 	// Reset everyone's coins
-	// for(var i=0; i<agents.length; i++){
-	// 	agents[i].resetCoins();
-	// }
+	for(var i=0; i<agents.length; i++){
+		agents[i].resetCoins();
+	}
 
 	// Round robin!
 	for(var i=0; i<agents.length; i++){
@@ -143,15 +143,15 @@ function Logic_tft(){
 }
 
 function Logic_tf2t(){
-	var self = this;
-	var howManyTimesCheated = 0;
-	var otherMove = PD.CHEAT;
-	self.play = function(){
-		return otherMove;
-	};
-	self.remember = function(own, other){
-		otherMove = other;
-	};
+    var self = this;
+    var myLastMove = PD.COOPERATE;
+    self.play = function(){
+        return myLastMove;
+    };
+    self.remember = function(own, other){
+        myLastMove = own; // remember MISTAKEN move
+        if(other==PD.COOPERATE) myLastMove = ((myLastMove==PD.COOPERATE) ? PD.CHEAT : PD.COOPERATE); // switch!
+    };
 }
 
 function Logic_grudge(){//Pecl
