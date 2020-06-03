@@ -218,7 +218,7 @@ function SandboxUI(config){
 			}
 
 			// Remainder sum of those NOT anchored (25-anchor.count)
-			_remainder = 8-initValue;
+			_remainder = 24-initValue;
 
 		}
 
@@ -231,7 +231,7 @@ function SandboxUI(config){
 		}).count = value;
 		
 		// What's the scale for the rest of 'em?
-		var newRemainder = 8-value;
+		var newRemainder = 24-value;
 		var scale = newRemainder/_remainder;
 
 		// Adjust everyone to scale, ROUNDING.
@@ -253,7 +253,7 @@ function SandboxUI(config){
 		total += value; // total
 
 		// Difference... 
-		var diff = 8-total;
+		var diff = 24-total;
 		// If negative, remove one starting from BOTTOM, skipping anchor.
 		// (UNLESS IT'S ZERO)
 		if(diff<0){
