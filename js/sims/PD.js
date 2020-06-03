@@ -130,7 +130,7 @@ function Logic_tft(){
 	var otherMove = PD.COOPERATE;
 	var roundCounter = 1;
 	self.play = function(){
-		if(roundCounter<10){
+		if(roundCounter<100){
 			return otherMove;
 		}else{
 			return PD.CHEAT;
@@ -160,40 +160,50 @@ function Logic_grudge(){//Pecl
 	var roundCounter = 1;
 	self.play = function(){
 		if(roundCounter <=2){
-			alert(1);
+			console.log(1);
+			console.log(roundCounter + 200);
+			console.log(PD.COOPERATE);
 			return PD.COOPERATE;
-		}else if(2 < roundCounter < 6){ 
-			alert(2);
+		}else if(2 < roundCounter && roundCounter < 6){ 
+			console.log(2);
+			console.log(roundCounter + 200);
 			if(othersMoves.includes(PD.COOPERATE)){
+				console.log(PD.COOPERATE);
 				return PD.COOPERATE;
 			}else{
+				console.log(PD.CHEAT);
 				return PD.CHEAT;
 			}
-		}else if(5 < roundCounter < 11){
-			alert(3);
+		}else if(5 < roundCounter && roundCounter < 11){
+			console.log(3);
+			console.log(roundCounter + 200);
 			othersMovesSecondSeries = [];
 			for(i=2;i<othersMoves.length;i++){
 				othersMovesSecondSeries.push(othersMoves[i]);
 			}
 			if(othersMovesSecondSeries.includes(PD.COOPERATE)){
+				console.log(PD.COOPERATE);
 				return PD.COOPERATE;
 			}else{
 				return PD.CHEAT;
 			}
-		}else if(10 < roundCounter < 21){
-			alert(4);
+		}else if(10 < roundCounter && roundCounter < 21){
+			console.log(4);
+			console.log(roundCounter + 200);
 			var CooperateWithMe = 0;
 			for(i=0;i<othersMoves.length;i++){
 				if(othersMoves[i]==PD.COOPERATE){
 					CooperateWithMe++;
 				}}
 			if(CooperateWithMe>6){
+				console.log(PD.COOPERATE);
 				return PD.COOPERATE;
 			}else{
 				return othersMoves[othersMoves.length - 1];
 			}
 		}else if(20 < roundCounter){
-			alert(5);
+			console.log(5);
+			console.log(roundCounter + 200);
 			var CooperateWithMe = 0;
 			for(i=0;i<othersMoves.length;i++){
 				if(othersMoves[i]==PD.COOPERATE){
@@ -203,6 +213,7 @@ function Logic_grudge(){//Pecl
 				if(othersMoves[othersMoves.length - 1] == PD.CHEAT && othersMoves[othersMoves.length - 2] == PD.CHEAT){
 					return PD.CHEAT;
 				}else{
+					console.log(PD.COOPERATE);
 					return PD.COOPERATE;
 				}
 			}else if(0.3*roundCounter < CooperateWithMe <= roundCounter){
@@ -216,7 +227,6 @@ function Logic_grudge(){//Pecl
 		othersMoves.push(other);
 		roundCounter++;
 	};
-	return PD.COOPERATE;
 }
 
 function Logic_all_d(){
@@ -241,7 +251,7 @@ function Logic_all_c(){
 	var otherMove = PD.COOPERATE;
 	var roundCounter = 1;
 	self.play = function(){
-		if(roundCounter<10){
+		if(roundCounter<100){
 			return otherMove;
 		}else{
 			return PD.CHEAT;
