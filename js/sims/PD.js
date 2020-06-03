@@ -160,29 +160,20 @@ function Logic_grudge(){//Pecl
 	var roundCounter = 1;
 	self.play = function(){
 		if(roundCounter <=2){
-			console.log(1);
-			console.log(roundCounter + 200);
-			console.log(PD.COOPERATE);
 			return PD.COOPERATE;
 		}else if(2 < roundCounter && roundCounter < 6){ 
-			console.log(2);
-			console.log(roundCounter + 200);
-			if(othersMoves.includes(PD.COOPERATE)){
-				console.log(PD.COOPERATE);
+			if(othersMoves.includes(PD.COOPERATE)){			
 				return PD.COOPERATE;
 			}else{
 				console.log(PD.CHEAT);
 				return PD.CHEAT;
 			}
 		}else if(5 < roundCounter && roundCounter < 11){
-			console.log(3);
-			console.log(roundCounter + 200);
 			othersMovesSecondSeries = [];
 			for(i=2;i<othersMoves.length;i++){
 				othersMovesSecondSeries.push(othersMoves[i]);
 			}
 			if(othersMovesSecondSeries.includes(PD.COOPERATE)){
-				console.log(PD.COOPERATE);
 				return PD.COOPERATE;
 			}else{
 				return PD.CHEAT;
@@ -196,7 +187,6 @@ function Logic_grudge(){//Pecl
 					CooperateWithMe++;
 				}}
 			if(CooperateWithMe>6){
-				console.log(PD.COOPERATE);
 				return PD.COOPERATE;
 			}else{
 				return othersMoves[othersMoves.length - 1];
@@ -213,7 +203,6 @@ function Logic_grudge(){//Pecl
 				if(othersMoves[othersMoves.length - 1] == PD.CHEAT && othersMoves[othersMoves.length - 2] == PD.CHEAT){
 					return PD.CHEAT;
 				}else{
-					console.log(PD.COOPERATE);
 					return PD.COOPERATE;
 				}
 			}else if(0.3*roundCounter < CooperateWithMe <= roundCounter){
