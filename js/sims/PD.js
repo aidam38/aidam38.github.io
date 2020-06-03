@@ -144,13 +144,13 @@ function Logic_tft(){
 
 function Logic_tf2t(){
 	var self = this;
-	var myLastMove = PD.CHEAT;
+	var howManyTimesCheated = 0;
+	var otherMove = PD.CHEAT;
 	self.play = function(){
-		return myLastMove;
+		return otherMove;
 	};
 	self.remember = function(own, other){
-		myLastMove = own; // remember MISTAKEN move
-		if(other==PD.COOPERATE) myLastMove = ((myLastMove==PD.COOPERATE) ? PD.CHEAT : PD.COOPERATE); // switch!
+		otherMove = other;
 	};
 }
 
@@ -218,9 +218,9 @@ function Logic_grudge(){//Pecl
 	};
 }
 
-function Logic_all_d(){ //Adam
+function Logic_all_d(){
 	var self = this;
-	var prevMove = PD.COOPERATE;
+	var otherMove = PD.COOPERATE;
 	var probability = 0.5;
 	var step = 0;
 
@@ -233,17 +233,13 @@ function Logic_all_d(){ //Adam
 		}
 	};
 	self.remember = function(own, other){
-		if(prevMove == PD.CHEAT && other == PD.CHEAT){
+		if(other == PD.CHEAT){
 			step--;
-		}else if (prevMove == PD.COOPERATE && other == PD.COOPERATE){
+		}else{
 			step++;
-		}else if((prevMove == PD.CHEAT && other == PD.COOPERATE) || (prevMove == PD.COOPERATE && other == PD.CHEAT)){
-			step = -step;
 		}
-		increment = Math.sign(step)*Math.pow(0.5, Math.abs(step))*0.5;
-		console.log(probability + "+=" + increment);
-		probability += increment;
-		prevMove = other;
+		probability += Math.sign(step)*Math.pow(0.5, Math.abs(step))*0.5;
+		console.log(probability);
 	};
 }
 
@@ -266,11 +262,21 @@ function Logic_all_c(){
 
 function Logic_random(){
 	var self = this;
+	var everHeatedMe = 0;
 	self.play = function(){
-		return (Math.random()>0.5 ? PD.COOPERATE : PD.CHEAT);
+		if(everHeatedMe==1){
+			return (Math.random()>0.75 ? PD.COOPERATE : PD.CHEAT);
+		}else if(everHeatedMe == 0){
+			return PD.COOPERATE;
+		}else{
+			return PD.CHEAT;
+		}
+		
 	};
 	self.remember = function(own, other){
-		// nah
+		if(other == PD.CHEAT){
+			everHeatedMe++;
+		}
 	};
 }
 
