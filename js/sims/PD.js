@@ -289,7 +289,7 @@ function Logic_prober(){
 	var howManyTimesCheated = 0;
 
 	self.play = function(){
-		round15 = roundCounter - 1 % 15
+		round15 = roundCounter - 1 % 15;
 		if(round15 < 9){
 			return moves[round15];
 		}else{
