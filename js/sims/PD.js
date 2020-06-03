@@ -178,7 +178,7 @@ function Logic_grudge(){//Pecl
 				return PD.CHEAT;
 			}
 		}else if(10 < roundCounter < 21){
-			//nah
+			 ///nah
 		}
 	};
 	self.remember = function(own, other){
