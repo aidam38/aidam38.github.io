@@ -186,8 +186,8 @@ function Logic_grudge(){//Pecl
 			for(i=0;i<othersMoves.length;i++){
 				if(othersMoves[i]==PD.COOPERATE){
 					CooperateWithMe++;
-				}
-			}if(CooperateWithMe>6){
+				}}
+			if(CooperateWithMe>6){
 				return PD.COOPERATE;
 			}else{
 				return othersMoves[othersMoves.length - 1];
@@ -198,7 +198,7 @@ function Logic_grudge(){//Pecl
 			for(i=0;i<othersMoves.length;i++){
 				if(othersMoves[i]==PD.COOPERATE){
 					CooperateWithMe++;
-				}
+				}}
 			if(CooperateWithMe>0.7*roundCounter){
 				if(othersMoves[othersMoves.length - 1] == PD.CHEAT && othersMoves[othersMoves.length - 2] == PD.CHEAT){
 					return PD.CHEAT;
@@ -216,6 +216,7 @@ function Logic_grudge(){//Pecl
 		othersMoves.push(other);
 		roundCounter++;
 	};
+	return PD.COOPERATE;
 }
 
 function Logic_all_d(){
@@ -298,7 +299,7 @@ function Logic_prober(){
 			}else{
 				return PD.COOPERATE;
 			}
-		}
+		}return PD.COOPERATE
 	};
 	self.remember = function(own, other){
                 if(other==PD.CHEAT){
