@@ -106,9 +106,9 @@ PD.playRepeatedGame = function(playerA, playerB, turns){
 PD.playOneTournament = function(agents, turns){
 
 	// Reset everyone's coins
-	for(var i=0; i<agents.length; i++){
-		agents[i].resetCoins();
-	}
+	// for(var i=0; i<agents.length; i++){
+	// 	agents[i].resetCoins();
+	// }
 
 	// Round robin!
 	for(var i=0; i<agents.length; i++){
