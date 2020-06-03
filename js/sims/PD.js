@@ -165,7 +165,6 @@ function Logic_grudge(){//Pecl
 			if(othersMoves.includes(PD.COOPERATE)){			
 				return PD.COOPERATE;
 			}else{
-				console.log(PD.CHEAT);
 				return PD.CHEAT;
 			}
 		}else if(5 < roundCounter && roundCounter < 11){
